@@ -18,7 +18,10 @@ var speedX = 0;
 var speedY = 0;
 var size = 1;
 var refrashRate = 7;
-var score = 0;
+let score = 0;
+let scoreMax = 0;
+
+let gameOver = false;
 
 var tamanhoBasico = canvasX / 20;
 
@@ -141,7 +144,9 @@ function snakeEatItself() {
                     snakeParts.shift();
                 }
             }
+            
             score = 0;
+            // gameOver = true;
             // pincel.font = "30px Arial";
             // pincel.fillText("Game Over", canvasX/2 - 65, canvasY/2);
             return;
@@ -174,8 +179,18 @@ function appleUpdate() {
 }
 
 function scoreFunction() {
+    pincel.fillStyle = "yellow";
     pincel.font = "15px Arial";
     pincel.fillText("Score:  " + score, 20, 30);
+
+    
+    if (score > scoreMax) {
+        scoreMax = score;
+    }
+
+    pincel.font = "15px Arial";
+    pincel.fillText("Score Max:  " + scoreMax, 20, 60);
+    
 }
 
 function refreshScreenPlay() {
@@ -184,10 +199,10 @@ function refreshScreenPlay() {
     snakeTail()
     moveSnake();
     appleUpdate();
-    scoreFunction();
+    //scoreFunction();
     snakeEatItself();
     outCanvas();
-
+    
     console.log(tailLength);
 }
 
@@ -197,6 +212,7 @@ function update(refrashRate) {
     setInterval( () => {
         refreshScreenPlay();
         drawSnake();
+        scoreFunction();        
     },1000/refrashRate);
 }
 
