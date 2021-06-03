@@ -117,15 +117,42 @@ function moveSnake() {
         }
     }
 
+    function touchMove() {
+        document.getElementById("btnup").addEventListener("click", () => {
+            if (speedY != tamanhoBasico) {
+                speedX = 0;
+                speedY = -1 * tamanhoBasico;
+            }
+        })
+        document.getElementById("btndown").addEventListener("click", () => {
+            if (speedY != -1 * tamanhoBasico) {
+                speedX = 0;
+                speedY = tamanhoBasico;
+            }
+        })
+        document.getElementById("btnright").addEventListener("click", () => {
+            if (speedX != -1 * tamanhoBasico) {
+                speedX = tamanhoBasico;
+                speedY = 0;
+            }
+        })
+        document.getElementById("btnleft").addEventListener("click", () => {
+            if (speedX != tamanhoBasico) {
+                speedX = -1 * tamanhoBasico;
+                speedY = 0;
+            }
+        })
+    }
+
+    touchMove();
+
     document.onkeydown = listener;
    
 
     snakeX += speedX;
     snakeY += speedY;
-
-    
-    
 }
+
 
 // -------------- Game Rules -------------- //
 

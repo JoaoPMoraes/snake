@@ -10,7 +10,7 @@ section {
 
 button {
     margin-top: 50px;
-    font-size: 1.2rem;
+    font-size: .8rem;
     font-weight: bold;
     color: white;
     height: 4rem;
@@ -31,7 +31,7 @@ canvas {
 }
 
 header {
-    height: 120px;
+    height: 70px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     padding: 2rem;
@@ -41,3 +41,21 @@ p {
     padding: 1rem;
 }
 
+.btns {
+    padding: 0px;
+    height: 250px;
+    display: block;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn {
+    align-items: top;
+    text-align: center;
+    margin: 2%;
+}
+
+#btnleft {
+    margin-right: 20%;
+}
