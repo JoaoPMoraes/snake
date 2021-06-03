@@ -31,8 +31,8 @@ var randomMultipleX = randomX - (randomX % tamanhoBasico);
 var randomY = (Math.random() * canvasY);
 var randomMultipleY = randomY - (randomY % tamanhoBasico);
 
-console.log(randomX,randomY);
-console.log(randomMultipleX/tamanhoBasico,randomMultipleY/tamanhoBasico);
+// console.log(randomX,randomY);
+// console.log(randomMultipleX/tamanhoBasico,randomMultipleY/tamanhoBasico);
 
 var xApple = randomMultipleX;
 var yApple = randomMultipleY;
@@ -117,42 +117,37 @@ function moveSnake() {
         }
     }
 
-    function touchMove() {
-        document.getElementById("btnup").addEventListener("click", () => {
-            if (speedY != tamanhoBasico) {
-                speedX = 0;
-                speedY = -1 * tamanhoBasico;
-            }
-        })
-        document.getElementById("btndown").addEventListener("click", () => {
-            if (speedY != -1 * tamanhoBasico) {
-                speedX = 0;
-                speedY = tamanhoBasico;
-            }
-        })
-        document.getElementById("btnright").addEventListener("click", () => {
-            if (speedX != -1 * tamanhoBasico) {
-                speedX = tamanhoBasico;
-                speedY = 0;
-            }
-        })
-        document.getElementById("btnleft").addEventListener("click", () => {
-            if (speedX != tamanhoBasico) {
-                speedX = -1 * tamanhoBasico;
-                speedY = 0;
-            }
-        })
+    function touchMove(evento) {
+
+        var clickX = evento.pageX - tela.offsetLeft;
+        var clickY = evento.pageY - tela.offsetTop;
+
+        if (clickX > canvasX/2 && speedX != -1 * tamanhoBasico && clickY > (canvasX/6)*1 && clickY < (canvasX/6)*5) {
+            speedX = tamanhoBasico;
+            speedY = 0;
+        }
+        if (clickX < canvasX/2 && speedX != tamanhoBasico && clickY > (canvasX/6)*1 && clickY < (canvasX/6)*5) {
+            speedX = -1 * tamanhoBasico;
+            speedY = 0;
+        }
+        if (clickY < canvasY/2 && speedY != tamanhoBasico && clickX > (canvasX/6)*1 && clickX < (canvasX/6)*5) {
+            speedX = 0;
+            speedY = -1 * tamanhoBasico;
+        }
+        if (clickY > canvasY/2 && speedY != -1 * tamanhoBasico && clickX > (canvasX/6)*1 && clickX < (canvasX/6)*5) {
+            speedX = 0;
+            speedY = tamanhoBasico;
+        }
+        console.log(clickX,clickY);
     }
 
-    touchMove();
-
+    tela.onclick = touchMove;
     document.onkeydown = listener;
    
 
     snakeX += speedX;
     snakeY += speedY;
 }
-
 
 // -------------- Game Rules -------------- //
 
@@ -186,7 +181,7 @@ function snakeEatItself() {
 function appleUpdate() {
     
     if (snakeX == xApple && snakeY == yApple) {
-        console.log("passou por cima");
+        // console.log("passou por cima");
         pincel.clearRect(xApple,yApple,tamanhoBasico,tamanhoBasico);
         
         randomX = (Math.random() * canvasX);
@@ -230,7 +225,7 @@ function refreshScreenPlay() {
     snakeEatItself();
     outCanvas();
     
-    console.log(tailLength);
+    // console.log(tailLength);
 }
 
 
